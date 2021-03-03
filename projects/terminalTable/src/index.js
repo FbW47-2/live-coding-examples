@@ -44,9 +44,9 @@ table.setWidth(150);
 table.setColumns(columns);
 table.setRows(rows);
 
-// console.log(table.createColumn("testwort", 50));
-
 console.log(table);
+
+// console.log(table.createColumn("testwort", 50));
 
 console.log("=".repeat(50));
 
