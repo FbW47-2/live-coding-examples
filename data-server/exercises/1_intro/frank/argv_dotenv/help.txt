@@ -1,0 +1,9 @@
+
+Syntax: node info <Parameter...>
+
+Parameter: os     = Info's zum Betriebssystem
+           sys    = Info's zur Hardware
+           user   = Benutzerinfo
+           dotenv = Environment-Variablen aus der '.env'-datei
+           all    = Alles ausgeben
+           help   = dieser Text
