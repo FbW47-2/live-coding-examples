@@ -9,6 +9,10 @@ server.listen(process.env.PORT, () => {
     console.log(`server is listening on port ${process.env.PORT}`);
 });
 
+// wichtig, um auf den Body der Anfrage zugreifen zu können
+// siehe server.post("/params-test"... weiter unten
+server.use(express.urlencoded({ extended: true }));
+
 // wir können mit den Methoden get(), post(), put(), delete() etc. in Kombination mit dem Pfad auf Requests reagieren
 server.get("/movies", (request, response) => {
     // über response.send() senden wir eine Rückmeldung an den Client. Express schließt den Response automatisch, somit fällt der Aufruf response.end() weg
@@ -27,6 +31,34 @@ server.get("/cats", (request, response) => {
 server.use("/birds", express.static("public"));
 // Im Falle einer einzelnen Datei reicht der Pfad (localhost:3344/surfin-bird)
 server.use("/surfin-bird", express.static("public/surfinbird.txt"));
+
+
+// wir können eine sog. Query an die URL anhängen, wenn wir eine Anfrage senden
+// dazu nutzen wir key-value-pairs, die wir vom Pfad mit einem ? trennen
+// mehrere key-value-pairs lassen sich mit einem & von einander trennen
+// Beispiel: localhost:3344/params-test?key1=value1&key2=value2
+server.get("/params-test", (request, response) => {
+    // die so übermittelten Daten sind dann in request.query nutzbar
+    console.log(request.query);
+    response.send();
+});
+
+// wenn ein Teil der URL variabel sein soll, kennzeichnen wir diesen mit einem : vor dem Variablennamen
+// dadurch lassen sich bspw. gezielt einzelne "Ressourcen" ansprechen
+// beachtet bitte, dass GET /params-test trotzdem noch über die o.g. Funktion abgefangen wird und die Anfrage erst hier landet, wenn etwas am Pfad anhängt
+// Beispiel: /params-test/12345
+server.get("/params-test/:id", (request, response) => {
+    console.log(request.params);
+    response.send();
+});
+
+// damit wir große Datenmengen und schützenswerte Informationen (Passwörter & Co.) nicht über die URL (als Query oder Param) senden müssen, können wir an den Request einen Body anhängen. Dafür benötigen die o.g. Middleware >> server.use(express.urlencoded({ extended: true })); <<
+// anschließend sind die Daten über request.body verfügbar
+server.post("/params-test", (request, response) => {
+    console.log(request.body);
+    response.send();
+});
+
 
 // express sucht nach den passenden Pfaden und Methoden und führt dann entsprechend die Funktionen aus.
 // sollte keine passende Funktion gefunden werden, landet der Request "am Ende" unserer server.js und kann mit server.use() ohne Pfadangabe abgefangen werden.
