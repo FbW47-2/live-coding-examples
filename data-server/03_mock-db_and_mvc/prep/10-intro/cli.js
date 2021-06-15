@@ -14,10 +14,10 @@ const db = new LowSync(adapter);
 db.read();
 // If file.json doesn't exist, db.data will be null
 // Set default data
-db.data ||= { posts: [] };
+db.data ||= { messages: [] };
 
 if (title) {
-    db.data.posts.push({ "title": title });
+    db.data.messages.push({ "title": title });
     //db.data.posts.push({ title });
     db.write();
 }
