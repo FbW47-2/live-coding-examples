@@ -23,7 +23,6 @@ app.get('/messages/:id', async (req, res) => {
 });
 
 app.post('/messages', async (req, res, next) => {
-    console.log("body:", req.body);
     const post = messages.push(req.body);
     await db.write();
     res.send("done");

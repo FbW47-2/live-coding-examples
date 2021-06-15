@@ -16,7 +16,6 @@ router.get('/:id', async (req, res) => {
 });
 
 router.post('/', async (req, res, next) => {
-    console.log("body:", req.body);
     const post = messages.push(req.body);
     await db.write();
     res.send("done");
