@@ -13,18 +13,18 @@ app.use(express.json());
 const adapter = new JSONFile('data/db.json');
 const db = new Low(adapter);
 await db.read();
-db.data ||= { posts: [] };
+db.data ||= { messages: [] };
 
-const { posts } = db.data;
+const { messages } = db.data;
 
-app.get('/posts/:id', async (req, res) => {
-    const post = posts.find((p) => p.id === req.params.id);
+app.get('/messages/:id', async (req, res) => {
+    const post = messages.find((p) => p.id === req.params.id);
     res.send(post);
 });
 
-app.post('/posts', async (req, res, next) => {
+app.post('/messages', async (req, res, next) => {
     console.log("body:", req.body);
-    const post = posts.push(req.body);
+    const post = messages.push(req.body);
     await db.write();
     res.send("done");
 });
