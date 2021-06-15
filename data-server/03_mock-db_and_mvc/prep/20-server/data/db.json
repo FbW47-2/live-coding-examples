@@ -1,0 +1,24 @@
+{
+  "posts": [
+    {
+      "id": "1",
+      "title": "Erster",
+      "text": "Hallo Welt"
+    },
+    {
+      "id": "2",
+      "title": "Zweiter",
+      "text": "hello world"
+    },
+    {
+      "id": "3",
+      "title": "Dritter",
+      "text": "salve mundus"
+    },
+    {
+      "id": "4",
+      "title": "Vierter",
+      "text": "Griaß Di Welt"
+    }
+  ]
+}
