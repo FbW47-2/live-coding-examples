@@ -18,12 +18,12 @@ db.data ||= { messages: [] };
 const { messages } = db.data;
 
 app.get('/messages/:id', async (req, res) => {
-    const post = messages.find((p) => p.id === req.params.id);
-    res.send(post);
+    const message = messages.find((p) => p.id === req.params.id);
+    res.send(message);
 });
 
 app.post('/messages', async (req, res, next) => {
-    const post = messages.push(req.body);
+    const message = messages.push(req.body);
     await db.write();
     res.send("done");
 });
