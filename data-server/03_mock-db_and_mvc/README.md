@@ -20,28 +20,38 @@ Request:
 - REST II: `POST` is for creating data
 
 ## Tool "Umlet"
+Genutzt um die Datei `WebApp-Architektur.uxf` zu erstellen.
 Used to create/view the file `WebApp-Architektur.uxf`.
 
 ## Lowdb
 
-https://www.npmjs.com/package/lowdb
+ENG: https://www.npmjs.com/package/lowdb
 
 ## Express
 ### .json()
-http://expressjs.com/en/api.html#express.json
+ENG: http://expressjs.com/en/api.html#express.json
 
 ### Request
-http://expressjs.com/en/api.html#req
+ENG: http://expressjs.com/en/api.html#req
 
 ### Routing
-https://expressjs.com/en/starter/basic-routing.html
+ENG: https://expressjs.com/en/starter/basic-routing.html
 
-https://expressjs.com/en/guide/routing.html
+ENG: https://expressjs.com/en/guide/routing.html
 
 ## Model View Controller
 
-https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller
+DEU: https://de.wikipedia.org/wiki/Model_View_Controller
 
-https://de.wikipedia.org/wiki/Model_View_Controller
+ENG: https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller
 
-https://codingstatus.com/express-mvc-structure/
+ENG: https://codingstatus.com/express-mvc-structure/
+
+## Representational State Transfer (REST)
+DEU: https://de.wikipedia.org/wiki/Representational_State_Transfer
+
+ENG: https://en.wikipedia.org/wiki/Representational_state_transfer
+
+and there especially:
+
+ENG: https://en.wikipedia.org/wiki/Representational_state_transfer#Semantics_of_HTTP_methods
