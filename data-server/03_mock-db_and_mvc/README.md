@@ -25,6 +25,9 @@ https://www.npmjs.com/package/lowdb
 ### .json()
 http://expressjs.com/en/api.html#express.json
 
+### Request
+http://expressjs.com/en/api.html#req
+
 ### Routing
 https://expressjs.com/en/starter/basic-routing.html
 
