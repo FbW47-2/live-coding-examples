@@ -1,0 +1,15 @@
+{
+  "name": "10-cli",
+  "version": "1.0.0",
+  "description": "",
+  "main": "cli.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "lowdb": "^2.1.0"
+  }
+}
