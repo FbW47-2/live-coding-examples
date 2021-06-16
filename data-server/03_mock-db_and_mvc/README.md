@@ -5,6 +5,8 @@ Mock:
 - Reading and writing to json file: `lowdb`
 - Setting up `lowdb`: `data` directory, initial setup
 
+app.get(PATH, () => {...});
+
 Controller:
 - MVC Concepts: C is for controller (brief definition)
 - Attaching controllers to our app: `app.get(<path>, <controller>)`
@@ -16,6 +18,9 @@ Request:
 - The request object: `req`
 - Receiving JSON requests: `app.post(<path>, <controller>)`, `req.body`
 - REST II: `POST` is for creating data
+
+## Tool "Umlet"
+Used to create/view the file `WebApp-Architektur.uxf`.
 
 ## Lowdb
 
