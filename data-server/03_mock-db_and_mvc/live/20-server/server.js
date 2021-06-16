@@ -19,7 +19,7 @@ app.listen(3000, () => {
 
 // http://localhost:3000/messages/1
 app.get('/messages/:id', async (req, res) => {
-	// TODO
+	// TODO: sende Response mit der Nachricht (ID) als json zum Client.
 })
 
 app.post('/messages', async (req, res) => {
