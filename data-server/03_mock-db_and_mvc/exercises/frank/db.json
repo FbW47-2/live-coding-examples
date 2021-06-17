@@ -1,9 +1,9 @@
 {
   "messages": [
     {
-      "id": "2",
-      "title": "Ich bin der geänderte Datensatz",
-      "text": "update update update usw...."
+      "id": "1",
+      "title": "Erster Datensatz",
+      "text": "Datenbank neu initialisiert.."
     },
     {
       "id": "3",
@@ -11,14 +11,19 @@
       "text": "blabla blubber"
     },
     {
+      "id": "4",
+      "title": "Vierter",
+      "text": "Rabaarber ..."
+    },
+    {
       "id": "5",
-      "title": "Ich bin der geänderte Datensatz",
-      "text": "update update update usw...."
+      "title": "Fünfter",
+      "text": "Hallo Welt"
     },
     {
       "id": "6",
-      "title": "Sechster",
-      "text": "Hallo Welt again"
+      "title": "Ich bin der geänderte Datensatz",
+      "text": "update update update usw...."
     },
     {
       "id": "7",
@@ -27,8 +32,8 @@
     },
     {
       "id": "8",
-      "title": "Achter",
-      "text": "The last one ..."
+      "title": "Ich bin der geänderte Datensatz",
+      "text": "update update update usw...."
     }
   ]
 }
