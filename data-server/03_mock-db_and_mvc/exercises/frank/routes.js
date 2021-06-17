@@ -30,11 +30,8 @@ router.post('/clear', async (req, res) =>
 	res.status("200").send("new database created\n");
 });
 // ========= update:id
-router.post('/update', async (req, res) => 
+router.put('/update', async (req, res) => 
 {
-    console.log("req=",req.query);
-    console.log(req.body);
-    
     if(req.query.hasOwnProperty('id')) 
     {
        let no=db.data.messages.findIndex(value => (value.id === req.query.id));
@@ -44,7 +41,6 @@ router.post('/update', async (req, res) =>
              db.data.messages[no].title=req.body.title;
           if(req.body.hasOwnProperty('text'))   
              db.data.messages[no].text=req.body.text;
-          console.log(db.data.messages[no]);  
           await db.write();
           res.status("200").send(`record with id=${req.query.id} updated`);
        }
@@ -53,7 +49,7 @@ router.post('/update', async (req, res) =>
         res.status("200").send(`Unknown ID!`);  
 });    
 // ========= delete:id
-router.get('/delete', async (req, res) => 
+router.delete('/delete', async (req, res) => 
 {
     if(req.query.hasOwnProperty('id')) 
     {
