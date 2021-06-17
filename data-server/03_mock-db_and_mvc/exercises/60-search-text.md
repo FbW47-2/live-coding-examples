@@ -1,8 +1,8 @@
 # Search Text
 
-Erstelle eine Route, die einen Eingabeparameter `searchSearch` akzeptiert.
+Erstelle eine Route, die einen Eingabeparameter `searchString` akzeptiert.
 
-Pfad: `/message/text/:searchSearch`
+Pfad: `/messages/text/:searchString`
 
 Beim Aufrufen dieser Route soll jede Nachricht ("message") zurückgegeben werden, deren `text`-Attribut den Parameter `searchString` enthält.
 
