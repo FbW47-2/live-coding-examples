@@ -1,4 +1,7 @@
 #!/bin/bash
+#
+# ./update.sh id <"title"> <"text">
+#
 defId="1"
 defTitle="Ich bin der geänderte Datensatz"
 defText="update update update usw...."
