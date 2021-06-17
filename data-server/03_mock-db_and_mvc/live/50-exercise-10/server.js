@@ -7,7 +7,11 @@ import routerMessages from './router/messages.js';
 import routerHello from './router/hello.js';
 
 const app = express();
-app.use(express.json());
+
+// stellt den "Reqest-Body" zur Verfügung.
+app.use(express.json({ type: 'application/json' })); // diese Middleware arbeitet nur für Request mit dem Header "Content-Type: application/json"
+// die Zeilen drüber und drunter machen das Selbe
+//app.use(express.json()); // default Content-Type für express.json() ist nämlich "application/json"
 
 app.listen(3000, () => {
 	console.log('listening on port 3000');

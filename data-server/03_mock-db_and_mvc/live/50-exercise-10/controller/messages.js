@@ -10,7 +10,8 @@ await db.read();
 
 
 async function create(req, res) {
-	console.log(req.body);
+	console.log(req.headers);
+	console.log("body:", req.body);
 	db.data.messages.push(req.body);
 	await db.write();
 	res.send("data written");
