@@ -1,6 +1,8 @@
-require("dotenv").config();
+//require("dotenv").config();
+import config from 'dotenv/config';
+//config();
+import express from 'express';
 
-const express = require("express");
 // wir erstellen einen Server mit express, indem wir express() aufrufen (ähnlich http.createServer())
 const server = express();
 
