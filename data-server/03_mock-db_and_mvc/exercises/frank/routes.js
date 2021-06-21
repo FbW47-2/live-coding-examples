@@ -5,7 +5,8 @@ const router = express.Router();
 let limit=1000;
 
 // Datenhaltung
-const adapter = new JSONFile('db.json');
+//const adapter = new JSONFile('db.json');
+const adapter = new JSONFile('./data/messages.json');
 const db = new Low(adapter);
 
 await db.read();
@@ -29,7 +30,7 @@ router.post('/clear', async (req, res) =>
 	await db.write();
 	res.status("200").send("new database created\n");
 });
-// ========= query:feld=inhalt<&feld=inhalt><&limit=max>
+// ========= query?feld=inhalt<&feld=inhalt><&limit=max>
 router.get('/query/', async (req, res) => 
 {
     setLimit(req.query);

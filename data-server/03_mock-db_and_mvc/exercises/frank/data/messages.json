@@ -1,0 +1,44 @@
+{
+  "messages": [
+    {
+      "id": "1",
+      "title": "Erster Datensatz",
+      "text": "Datenbank neu initialisiert.."
+    },
+    {
+      "id": "2",
+      "title": "Zweiter",
+      "text": "Hallo Welt again"
+    },
+    {
+      "id": "3",
+      "title": "Dritter",
+      "text": "blabla blubber"
+    },
+    {
+      "id": "4",
+      "title": "Vierter",
+      "text": "Rabaarber ..."
+    },
+    {
+      "id": "5",
+      "title": "Fünfter",
+      "text": "Hallo Welt"
+    },
+    {
+      "id": "6",
+      "title": "Sechster",
+      "text": "Hallo Welt again"
+    },
+    {
+      "id": "7",
+      "title": "Siebenter",
+      "text": "blabla blubber"
+    },
+    {
+      "id": "8",
+      "title": "Achter",
+      "text": "The last one ..."
+    }
+  ]
+}
