@@ -29,6 +29,28 @@ router.post('/clear', async (req, res) =>
 	await db.write();
 	res.status("200").send("new database created\n");
 });
+// ========= query:feld=inhalt<&feld=inhalt><&limit=max>
+router.get('/query/', async (req, res) => 
+{
+    setLimit(req.query);
+    const querys = Object.entries(req.query).filter(value => (value[0] !== 'limit') &&
+                                                              value[0] !== 'offset');
+    const found=db.data.messages.filter((value) => 
+                                 {
+                                  //console.log('value=',value);
+                                  for(let i = 0; i < querys.length && limit >= 0; i++)
+                                  {
+                                    //console.log(value[querys[i][0]],'==',querys[i][1],'=',value[querys[i][0]].includes(querys[i][1].replaceAll('"','')));
+                                    if(!value[querys[i][0]].includes(querys[i][1].replaceAll('"','')))
+                                      return false;  
+                                  }
+                                  if(--limit < 0)
+                                    return false;
+                                  return true;   
+                                 });
+    console.log("Found:\n",found);
+    res.status("200").send(found);
+})
 // ========= update:id
 router.put('/update', async (req, res) => 
 {

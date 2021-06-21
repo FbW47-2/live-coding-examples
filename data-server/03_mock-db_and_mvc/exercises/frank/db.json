@@ -6,6 +6,11 @@
       "text": "Datenbank neu initialisiert.."
     },
     {
+      "id": "2",
+      "title": "Zweiter",
+      "text": "Hallo Welt again"
+    },
+    {
       "id": "3",
       "title": "Dritter",
       "text": "blabla blubber"
@@ -22,8 +27,8 @@
     },
     {
       "id": "6",
-      "title": "Ich bin der geänderte Datensatz",
-      "text": "update update update usw...."
+      "title": "Sechster",
+      "text": "Hallo Welt again"
     },
     {
       "id": "7",
@@ -32,8 +37,8 @@
     },
     {
       "id": "8",
-      "title": "Ich bin der geänderte Datensatz",
-      "text": "update update update usw...."
+      "title": "Achter",
+      "text": "The last one ..."
     }
   ]
 }
