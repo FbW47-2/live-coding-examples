@@ -1,7 +1,10 @@
 # Search Text
 
-Erstelle eine Route, die einen Eingabeparameter `needle` akzeptiert.
-Beim Aufrufen dieser Route soll jede Nachricht ("message") zurückgegeben werden, deren `text`-Attribut den Parameter `needle` enthält.
+Erstelle eine Route, die einen Eingabeparameter `searchString` akzeptiert.
+
+Pfad: `/messages/text/:searchString`
+
+Beim Aufrufen dieser Route soll jede Nachricht ("message") zurückgegeben werden, deren `text`-Attribut den Parameter `searchString` enthält.
 
 Fragen/Aufgaben:
 - Handelt es sich um einen rein lesenden Zugriff?

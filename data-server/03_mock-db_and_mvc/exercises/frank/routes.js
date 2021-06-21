@@ -5,7 +5,8 @@ const router = express.Router();
 let limit=1000;
 
 // Datenhaltung
-const adapter = new JSONFile('db.json');
+//const adapter = new JSONFile('db.json');
+const adapter = new JSONFile('./data/messages.json');
 const db = new Low(adapter);
 
 await db.read();
@@ -29,12 +30,31 @@ router.post('/clear', async (req, res) =>
 	await db.write();
 	res.status("200").send("new database created\n");
 });
-// ========= update:id
-router.post('/update', async (req, res) => 
+// ========= query?feld=inhalt<&feld=inhalt><&limit=max>
+router.get('/query/', async (req, res) => 
 {
-    console.log("req=",req.query);
-    console.log(req.body);
-    
+    setLimit(req.query);
+    const querys = Object.entries(req.query).filter(value => (value[0] !== 'limit') &&
+                                                              value[0] !== 'offset');
+    const found=db.data.messages.filter((value) => 
+                                 {
+                                  //console.log('value=',value);
+                                  for(let i = 0; i < querys.length && limit >= 0; i++)
+                                  {
+                                    //console.log(value[querys[i][0]],'==',querys[i][1],'=',value[querys[i][0]].includes(querys[i][1].replaceAll('"','')));
+                                    if(!value[querys[i][0]].includes(querys[i][1].replaceAll('"','')))
+                                      return false;  
+                                  }
+                                  if(--limit < 0)
+                                    return false;
+                                  return true;   
+                                 });
+    console.log("Found:\n",found);
+    res.status("200").send(found);
+})
+// ========= update:id
+router.put('/update', async (req, res) => 
+{
     if(req.query.hasOwnProperty('id')) 
     {
        let no=db.data.messages.findIndex(value => (value.id === req.query.id));
@@ -44,7 +64,6 @@ router.post('/update', async (req, res) =>
              db.data.messages[no].title=req.body.title;
           if(req.body.hasOwnProperty('text'))   
              db.data.messages[no].text=req.body.text;
-          console.log(db.data.messages[no]);  
           await db.write();
           res.status("200").send(`record with id=${req.query.id} updated`);
        }
@@ -53,7 +72,7 @@ router.post('/update', async (req, res) =>
         res.status("200").send(`Unknown ID!`);  
 });    
 // ========= delete:id
-router.get('/delete', async (req, res) => 
+router.delete('/delete', async (req, res) => 
 {
     if(req.query.hasOwnProperty('id')) 
     {
