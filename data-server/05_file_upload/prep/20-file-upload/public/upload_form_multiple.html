@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=1000, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <h1>File Upload Form</h1>
+    <p>adapted from:
+      <a href="https://github.com/richardgirges/express-fileupload/tree/master/example#basic-file-upload">https://github.com/richardgirges/express-fileupload/tree/master/example#basic-file-upload</a>
+    </p>
+
+    <form ref='uploadForm'
+      id='uploadForm'
+      action='/upload_multiple_files'
+      method='post'
+      encType="multipart/form-data"
+    >
+        <input type="file" name="file1" /><br>
+        <input type="file" name="file2" /><br>
+        <input type="file" name="file3" /><br>
+        <br>
+        <input type='submit' value='Hochladen' />
+    </form>
+
+</body>
+</html>
