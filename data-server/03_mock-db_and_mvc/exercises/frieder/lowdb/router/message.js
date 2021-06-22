@@ -1,6 +1,9 @@
 import { JSONFile, Low } from 'lowdb';
 
 import express from 'express';
+
+import methods from '../methods.js';
+
 const MESSAGES_PATH = './data/messages.json';
 
 
@@ -40,11 +43,17 @@ router.post('/', async (req, res) => {
     res.send('message saved');
 });
 
+router.delete('/:id', async (req, res) => {
+    methods.deleteById(req.params.id, collection)
+        .then(() => res.send('message deleted'))
+        .catch(e => res.status(e.status).send(e.message))
+    ;
+});
 router.delete('/', async (req, res) => {
-    const index = findIndex(req.query.id, collection);
-    dataCollection.splice(index, 1);
-    await db.write();
-    res.send('message deleted');
+    methods.deleteById(req.query.id, collection)
+        .then(() => res.send('message deleted'))
+        .catch(e => res.status(e.status).send(e.message))
+    ;
 });
 
 router.put('/all', async (req, res) => {
@@ -59,7 +68,7 @@ router.put('/strict', async (req, res) => {
     const index = findIndex(req.body.id, collection);
     const {
         title = dataCollection[index].title,
-        text = dataCollection[index].text 
+        text = dataCollection[index].text
     } = req.body;
     Object.assign(dataCollection[index], { title: title, text: text });
     await db.write();
