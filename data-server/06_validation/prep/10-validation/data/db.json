@@ -1,0 +1,48 @@
+{
+  "messages": [
+    {
+      "id": "1",
+      "title": "Erster",
+      "text": "Hallo Welt"
+    },
+    {
+      "id": "2",
+      "title": "Zweiter",
+      "text": "hello world"
+    },
+    {
+      "id": "3",
+      "title": "Dritter",
+      "text": "salve mundus"
+    },
+    {
+      "id": "4",
+      "title": "Vierter",
+      "text": "Griaß Di Welt"
+    },
+    {
+      "id": "5",
+      "contact": "thomas.hofmann@digitalcareerinstitute.org",
+      "title": "&lt;strong&gt;Injected HTML&lt;&#x2F;strong&gt;",
+      "text": "Hallo Welt"
+    },
+    {
+      "id": "5",
+      "contact": "thomas.hofmann@digitalcareerinstitute.org",
+      "title": "&lt;strong&gt;Injected HTML&lt;&#x2F;strong&gt;",
+      "text": "Hallo Welt"
+    },
+    {
+      "id": "5",
+      "contact": "thomas.hofmann@digitalcareerinstitute.org",
+      "title": "Fünfter",
+      "text": "Hallo Welt"
+    },
+    {
+      "id": "5",
+      "contact": "thomas.hofmann@digitalcareerinstitute.org",
+      "title": "Fünfter",
+      "text": "Hallo &lt;em&gt;Welt&lt;&#x2F;em&gt;"
+    }
+  ]
+}
