@@ -9,7 +9,6 @@
 - Adding `express-validator` to our project
 - Validating fields: `check(<field name>).<matcher function>`
 
-optional:
 ## (44) Checking for errors:
 - Parsing the request: `validationResult(req)` => ValidationResult
 - Checking the result: `ValidationResult.prototype.isEmpty()`
