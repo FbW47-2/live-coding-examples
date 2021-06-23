@@ -17,12 +17,6 @@ app.use(fileUpload()); // erwartet header: "Content-Type: multipart/form-data", 
 
 app.use(express.static('public'));
 
-// TODO:
-//app.use('/public_index',
-//	express.static('public_index'),
-//	serveIndex('public_index', { 'icons': true })
-//);
-
 app.post('/upload', function (req, res) {
 	if (!req.files || Object.keys(req.files).length === 0) {
 		return res.status(400).send('No files were uploaded.');
@@ -39,6 +33,9 @@ app.post('/upload', function (req, res) {
 
 		res.send(`file ${file} uploaded.`);
 	});
-
-	//res.status(201).send(file); // 201 => created
 });
+
+app.use('/uploaded_files', // <- Route
+	express.static('uploaded_files'), // <- Handler for static files
+	serveIndex('uploaded_files', { 'icons': true }) // <- Handler directory index
+);
