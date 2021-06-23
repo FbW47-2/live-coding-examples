@@ -9,7 +9,8 @@ app.listen(PORT, () => {
 	console.log(`server is listening on port ${PORT}`);
 });
 
-app.use(express.static('public'));
+//app.use(express.static('public')); // dotfiles default: liefert .Dateien nicht aus, aber .Verzeichnisse werden ausgeliefert
+app.use(express.static('public', { 'dotfiles': 'deny' }));
 
 app.use('/public_index',
 	express.static('public_index'),
