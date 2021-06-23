@@ -8,5 +8,7 @@
 ## Serving Static Files
 https://expressjs.com/en/starter/static-files.html
 
+http://expressjs.com/en/resources/middleware/serve-static.html
+
 ## express-fileupload
 https://www.npmjs.com/package/express-fileupload
