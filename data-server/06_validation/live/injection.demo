@@ -1,6 +1,6 @@
 # Javascript Injection:
 
-userInput="<script>....</script>"
+userInput="<script>JAVASCRIPT</script>"
 
 userInput -> SERVER 
 
