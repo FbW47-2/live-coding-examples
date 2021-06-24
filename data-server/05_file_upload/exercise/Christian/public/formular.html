@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Formular</title>
+</head>
+<body>
+    <h1>Upload Form</h1>
+    <form action="/upload_multiple_files" method="post" enctype="multipart/form-data">
+        <div>
+            <p>Name:</p>
+            <input type="file" name="file_a" placeholder= "Text">
+            <p>Age:</p>
+            <input type="file" name="file_b" placeholder= "Number">
+            <p>Photo:</p>
+            <input type="file" name="file_c">
+        </div>
+        <br>
+        <input type="submit" value="Hochladen">    
+    </form>
+</body>
+</html>
