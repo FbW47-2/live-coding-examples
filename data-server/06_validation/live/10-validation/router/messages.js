@@ -22,7 +22,7 @@ router.get('/:id',
 
 router.post('/',
 	body('id', 'must be a number').isNumeric(),
-	check('contact').optional().isEmail(),      // optionales element
+	check('contact', 'optional email address').optional().isEmail(),      // optionales element
 	check(['title', 'text']).isString(),
 	check('title').not().contains('<').withMessage('"<" not allowed'), // negierte Validierung
 	check('title').not().contains('>').withMessage('">" not allowed'),
