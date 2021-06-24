@@ -1,0 +1,19 @@
+# Javascript Injection:
+
+userInput="<script>....</script>"
+
+userInput -> SERVER 
+
+---
+
+SERVER:
+   isValid(userInput);  => bspw. string?
+   sanitize(userInput); => bspw. escapeHTML(userInput);
+
+---
+
+<h1>${userInput}</h1>
+
+<
+wird durch escapeHTML() bspw. zu:
+&lt;
