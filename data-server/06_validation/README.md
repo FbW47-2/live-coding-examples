@@ -1,5 +1,8 @@
 # Validation
 
+## HTTP-Statuscodes
+https://de.wikipedia.org/wiki/HTTP-Statuscode
+
 ## (42) Introduction: Making data consistent and secure
 
 ## (43) Validate:
@@ -19,3 +22,7 @@
 ## Links
 ### Express Validator
 https://express-validator.github.io/docs/
+https://github.com/validatorjs/validator.js#validators
+
+### URL
+https://de.wikipedia.org/wiki/Uniform_Resource_Locator
