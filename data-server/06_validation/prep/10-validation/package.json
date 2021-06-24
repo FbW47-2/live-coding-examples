@@ -1,7 +1,7 @@
 {
-  "name": "40-controller",
+  "name": "10-validation",
   "version": "1.0.0",
-  "description": "Introduction of Lowdb",
+  "description": "",
   "main": "server.js",
   "type": "module",
   "scripts": {
