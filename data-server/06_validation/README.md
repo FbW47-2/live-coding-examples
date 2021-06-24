@@ -20,6 +20,9 @@ https://de.wikipedia.org/wiki/HTTP-Statuscode
   `check(<field name).<matcher function>.withMessage(<message>)`
 
 ## Links
+### Express Middleware
+http://expressjs.com/en/guide/using-middleware.html
+
 ### Express Validator
 https://express-validator.github.io/docs/
 https://github.com/validatorjs/validator.js#validators
