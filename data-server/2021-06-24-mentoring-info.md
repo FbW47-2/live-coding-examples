@@ -1,4 +1,4 @@
-2021-07-21 - 2021-10-15 - Freitags 96 TU, 12 weeks
+2021-07-16 - 2021-10-15 - Freitags 9-16, 96 TU, 12 weeks
 
 Mentor: Florian Hahn
 
