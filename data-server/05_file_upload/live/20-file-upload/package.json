@@ -1,7 +1,7 @@
 {
-  "name": "10-static",
+  "name": "20-file-upload",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "server.js",
   "author": "Thomas Hofmann",
   "license": "MIT",
   "type": "module",
@@ -11,7 +11,8 @@
   },
   "dependencies": {
     "express": "^4.17.1",
-    "express-fileupload": "^1.2.1"
+    "express-fileupload": "^1.2.1",
+    "serve-index": "^1.9.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.7"

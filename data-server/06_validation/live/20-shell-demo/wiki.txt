@@ -1,0 +1,326 @@
+Regulärer Ausdruck
+(Weitergeleitet von Regexp)
+Zur Navigation springen
+Zur Suche springen
+
+Ein regulärer Ausdruck (englisch regular expression, Abkürzung RegExp oder Regex) ist in der theoretischen Informatik eine Zeichenkette, die der Beschreibung von Mengen von Zeichenketten mit Hilfe bestimmter syntaktischer Regeln dient. Reguläre Ausdrücke finden vor allem in der Softwareentwicklung Verwendung. Neben Implementierungen in vielen Programmiersprachen verarbeiten auch viele Texteditoren reguläre Ausdrücke in der Funktion „Suchen und Ersetzen“. Ein einfacher Anwendungsfall von regulären Ausdrücken sind Wildcards.
+
+Reguläre Ausdrücke können als Filterkriterien in der Textsuche verwendet werden, indem der Text mit dem Muster des regulären Ausdrucks abgeglichen wird. Dieser Vorgang wird auch Pattern Matching genannt. So ist es beispielsweise möglich, alle Wörter aus einer Wortliste herauszusuchen, die mit S beginnen und auf D enden, ohne die dazwischen liegenden Buchstaben oder deren Anzahl explizit vorgeben zu müssen.
+
+Der Begriff des regulären Ausdrucks geht im Wesentlichen auf den Mathematiker Stephen Kleene zurück, der die ähnliche Bezeichnung reguläre Menge verwendete.[1]
+Inhaltsverzeichnis
+
+    1 Reguläre Ausdrücke in der theoretischen Informatik
+        1.1 Theoretische Grundlagen
+            1.1.1 Syntax
+            1.1.2 Semantik
+        1.2 Beispiele
+    2 Anwendung regulärer Ausdrücke
+    3 Reguläre Ausdrücke in der Praxis
+        3.1 Zeichenliterale
+        3.2 Ein Zeichen aus einer Auswahl
+        3.3 Vordefinierte Zeichenklassen
+        3.4 Quantoren
+        3.5 Possessives Verhalten
+        3.6 Gruppierungen und Rückwärtsreferenzen
+        3.7 Alternativen
+        3.8 Weitere Zeichen
+        3.9 Look-around assertions
+        3.10 Bedingte Ausdrücke
+    4 Literatur
+    5 Weblinks
+        5.1 Software
+    6 Einzelnachweise
+
+Reguläre Ausdrücke in der theoretischen Informatik
+Theoretische Grundlagen
+
+Reguläre Ausdrücke beschreiben eine Familie von formalen Sprachen und gehören damit zur theoretischen Informatik. Diese Sprachen, die regulären Sprachen, befinden sich auf der untersten und somit ausdrucksschwächsten Stufe der Chomsky-Hierarchie (Typ 3). Sie werden erzeugt durch reguläre Grammatiken.
+
+Zu jedem regulären Ausdruck existiert ein endlicher Automat, der die vom Ausdruck spezifizierte Sprache akzeptiert. Ein entsprechender (nichtdeterministischer) endlicher Automat kann mit der Thompson-Konstruktion[2] aus einem regulären Ausdruck konstruiert werden. Daraus folgt die relativ einfache Implementierbarkeit regulärer Ausdrücke. Umgekehrt existiert zu jedem endlichen Automaten ein regulärer Ausdruck, der die vom Automaten akzeptierte Sprache beschreibt. Ein entsprechender regulärer Ausdruck kann mit Kleenes Algorithmus[1][3] aus einem nichtdeterministischen endlichen Automaten konstruiert werden. Kleenes Algorithmus erzeugt meist sehr lange reguläre Ausdrücke. Die Zustands-Elimination[3] (deutsch eigentlich: „Zustands-Eliminierung“) liefert in der Praxis meist kürzere reguläre Ausdrücke. Im Höchstfall (engl. „worst case“) liefern jedoch beide Algorithmen reguläre Ausdrücke der Länge | Σ | 4 | Q | {\displaystyle |\Sigma |4^{|Q|}} |\Sigma |4^{{|Q|}}[4], wobei | Σ | {\displaystyle |\Sigma |} |\Sigma | die Anzahl der Zeichen des zugrundeliegenden Alphabets und | Q | {\displaystyle |Q|} |Q| die Anzahl der Zustände im Automaten bezeichnen.
+Syntax
+
+Die Syntax definiert genau, wie reguläre Ausdrücke aussehen.
+
+Reguläre Ausdrücke sind immer über einem vorgegebenen Zeichenvorrat Σ {\displaystyle \Sigma } \Sigma definiert, dem sogenannten Alphabet. Reguläre Ausdrücke basieren auf genau drei Operationen: Alternative, Verkettung und Wiederholung. Die formale Definition sieht folgendermaßen aus:
+
+    ∅ {\displaystyle \varnothing } \varnothing (das spezielle Symbol für die leere Menge) ist ein regulärer Ausdruck.
+    für alle a i ∈ Σ {\displaystyle a_{i}\in \Sigma } a_i \in \Sigma ist a i {\displaystyle \mathbf {a} _{i}} \mathbf {a} _{i} (die Repräsentation eines Zeichens aus dem zugrunde liegenden Alphabet) ein regulärer Ausdruck.
+    Sind x {\displaystyle x} x und y {\displaystyle y} y reguläre Ausdrücke, so sind auch ( x | y ) {\displaystyle (x|y)} (x | y) (Alternative), ( x y ) {\displaystyle (xy)} (xy) (Verkettung) und ( x ∗ ) {\displaystyle (x^{*})} (x^*) (Kleenesche Hülle, Kleene-Stern) reguläre Ausdrücke.
+
+Für Alternative wird statt | {\displaystyle |} | auch das Symbol + {\displaystyle +} + verwendet. Man schreibt dann ( x + y ) {\displaystyle (x+y)} (x+y). Für die Verkettung (Konkatenation) gibt es alternativ auch ein Operatorsymbol; man schreibt dann ( x ⋅ y ) {\displaystyle (x\cdot y)} (x \cdot y).
+
+Man kann auch zusätzliche Konstanten und Operationen erlauben, sofern sich ihre Wirkung auch mit den oben genannten Grundregeln beschreiben ließe. So findet man in der Literatur unter anderem auch ϵ {\displaystyle \epsilon } \epsilon als regulären Ausdruck[3] oder die positive Kleenesche Hülle x + {\displaystyle x^{+}} x^+, die als Abkürzung von ( x ( x ∗ ) ) {\displaystyle (x(x^{*}))} (x(x^*)) betrachtet werden kann.
+
+Gibt man eine Rangfolge der Operatoren an, kann man auf einige Klammern verzichten. Die Rangfolge ist üblicherweise Kleene-Stern vor Konkatenation vor Alternative. Statt ( ( ( a b ) | c ) ∗ ) {\displaystyle (((ab)|c)^{*})} (((ab) | c)^*) genügt dann die Schreibweise ( a b | c ) ∗ {\displaystyle (ab|c)^{*}} (ab | c)^*.
+
+Die Anzahl der verschachtelten *-Operatoren wird als Sternhöhe bezeichnet.
+Semantik
+
+Die Semantik regulärer Ausdrücke definiert genau, welche formale Bedeutung die Syntax regulärer Ausdrücke hat.
+
+Ein regulärer Ausdruck beschreibt eine formale Sprache, also eine Menge von Wörtern (Zeichenketten). Die Definition der Semantik lässt sich analog zur Syntaxdefinition beschreiben. Dabei bezeichnet L ( r e g e x ) {\displaystyle {\mathcal {L}}(regex)} \mathcal{L}(regex) die formale Sprache, die durch den regulären Ausdruck r e g e x {\displaystyle regex} regex spezifiziert wird.
+
+    L ( ∅ ) = ∅ {\displaystyle {\mathcal {L}}(\varnothing )=\emptyset } \mathcal{L}(\varnothing) = \emptyset
+
+        Das spezielle Symbol für die leere Menge spezifiziert die leere Sprache.
+
+    für alle a i ∈ Σ {\displaystyle a_{i}\in \Sigma } a_i \in \Sigma gilt L ( a i ) = { a i } {\displaystyle {\mathcal {L}}(\mathbf {a} _{i})=\{a_{i}\}} \mathcal{L}(\mathbf{a}_i)=\{a_i\}
+
+        Jeder Repräsentant eines Zeichens aus dem Alphabet spezifiziert die Sprache, die nur dieses Zeichen enthält.
+
+    sind x {\displaystyle x} x und y {\displaystyle y} y reguläre Ausdrücke, so gilt:
+        L ( x | y ) = L ( x ) ∪ L ( y ) {\displaystyle {\mathcal {L}}(x|y)={\mathcal {L}}(x)\cup {\mathcal {L}}(y)} \mathcal{L}(x | y)=\mathcal{L}(x) \cup \mathcal{L}(y)
+
+        Die Alternative zwischen zwei Ausdrücken beschreibt die Sprache, die aus der Vereinigung der zwei Sprachen entsteht, die durch die beiden Ausdrücke beschrieben werden.
+
+        L ( x y ) = { α β | α ∈ L ( x ) ∧ β ∈ L ( y ) } {\displaystyle {\mathcal {L}}(xy)=\{\alpha \beta \;\vert \;\alpha \in {\mathcal {L}}(x)\land \beta \in {\mathcal {L}}(y)\}} \mathcal{L}(xy)=\{\alpha\beta\; \vert\; \alpha \in \mathcal{L}(x) \land \beta \in \mathcal{L}(y)\}
+
+        Die Konkatenation zweier Ausdrücke beschreibt die Sprache, die nur die Wörter enthält, die ein Wort aus der vom ersten Ausdruck beschriebenen Sprache als Präfix haben und deren unmittelbar folgendes Rest-Suffix ein Wort aus der vom zweiten Ausdruck beschriebenen Sprache ist.
+
+        L ( x ∗ ) = ∪ i ≥ 0 L i ( x ) {\displaystyle {\mathcal {L}}(x^{*})=\cup _{i\geq 0}\;{\mathcal {L}}^{i}(x)} \mathcal{L}(x^*) = \cup_{i\geq 0}\; \mathcal{L}^i(x)
+
+        Die kleenesche Hülle regulärer Ausdrücke beschreibt die kleenesche Hülle der durch x {\displaystyle x} x beschriebenen Sprache.
+
+Enthält die Syntaxdefinition regulärer Ausdrücke auch die Konstante ϵ {\displaystyle \epsilon } \epsilon , so ist deren Bedeutung definiert als L ( ϵ ) = { ε } {\displaystyle {\mathcal {L}}(\epsilon )=\{\varepsilon \}} \mathcal{L}(\epsilon)=\{\varepsilon\}, also die Sprache, die nur das leere Wort ε {\displaystyle \varepsilon } \varepsilon enthält.
+
+Das leere Wort ist ein Wort einer formalen Sprache ( ε ∈ Σ ∗ {\displaystyle \varepsilon \in \Sigma ^{*}} \varepsilon \in \Sigma^*) und somit kein regulärer Ausdruck. Die Sprache, die nur das leere Wort enthält, lässt sich aber auch ohne die Konstante ϵ {\displaystyle \epsilon } \epsilon durch einen regulären Ausdruck beschreiben, zum Beispiel: ∅ ∗ {\displaystyle \varnothing ^{*}} \varnothing^*. Es wird jedoch nicht immer optisch zwischen einem regulären Ausdruck und der zugehörigen Sprache unterschieden, sodass man statt a {\displaystyle \mathbf {a} } \mathbf {a} auch a {\displaystyle a} a als regulären Ausdruck für die Sprache { a } {\displaystyle \{a\}} \{a\} verwendet, ebenso kann die Unterscheidung zwischen ∅ {\displaystyle \varnothing } \varnothing und ∅ {\displaystyle \emptyset } \emptyset sowie zwischen ϵ {\displaystyle \epsilon } \epsilon und ε {\displaystyle \varepsilon } \varepsilon entfallen.
+Beispiele
+
+Wenn das Alphabet aus den Buchstaben a {\displaystyle a} a, b {\displaystyle b} b und c {\displaystyle c} c besteht, also Σ = { a , b , c } {\displaystyle \Sigma =\{a,b,c\}} \Sigma =\{a,b,c\}, dann lassen sich die folgenden Sprachen mit den entsprechenden regulären Ausdrücken beschreiben:
+
+    Die Sprache aller Wörter, die aus beliebig vielen a {\displaystyle a} a oder aus beliebig vielen b {\displaystyle b} b bestehen:
+
+        Syntax: r e g e x = a ∗ | b ∗ {\displaystyle regex=\mathbf {a} ^{*}|\mathbf {b} ^{*}} regex = \mathbf{a}^* | \mathbf{b}^*. Semantik: L ( r e g e x ) = { a } ∗ ∪ { b } ∗ {\displaystyle {\mathcal {L}}(regex)=\{a\}^{*}\cup \{b\}^{*}} \mathcal{L}(regex)=\{a\}^* \cup \{b\}^*
+
+    Die Sprache aller Wörter, die mit a {\displaystyle a} a anfangen und mit beliebig vielen a {\displaystyle a} a oder beliebig vielen b {\displaystyle b} b oder beliebig vielen c {\displaystyle c} c enden:
+
+        Syntax: r e g e x = a ( a | b | c ) ∗ {\displaystyle regex=\mathbf {a} (\mathbf {a} |\mathbf {b} |\mathbf {c} )^{*}} regex = \mathbf{a}(\mathbf{a}|\mathbf{b}|\mathbf{c})^*. Semantik: L ( r e g e x ) = { a β | β ∈ Σ ∗ } {\displaystyle {\mathcal {L}}(regex)=\{a\beta \;\vert \;\beta \in \Sigma ^{*}\}} \mathcal{L}(regex)=\{a\beta \;\vert\; \beta \in \Sigma^*\}
+
+    Die Sprache aller Wörter, die mit a {\displaystyle a} a anfangen und enden und dazwischen nur aus beliebig vielen c {\displaystyle c} c bestehen:
+
+        Syntax: a c ∗ a {\displaystyle \mathbf {a} \mathbf {c} ^{*}\mathbf {a} } \mathbf{a}\mathbf{c}^*\mathbf{a}. Semantik: L ( r e g e x ) = { a β a | β ∈ { c } ∗ } {\displaystyle {\mathcal {L}}(regex)=\{a\beta a\;\vert \;\beta \in \{c\}^{*}\}} \mathcal{L}(regex)=\{a\beta a \;\vert\; \beta \in \{c\}^*\}
+
+    Die Sprache aller Wörter, die aus den zwei Zeichen a {\displaystyle a} a und b {\displaystyle b} b bestehen:
+
+        Syntax: ( a | b ) ( a | b ) {\displaystyle (\mathbf {a} |\mathbf {b} )(\mathbf {a} |\mathbf {b} )} (\mathbf{a}|\mathbf{b}) (\mathbf{a}|\mathbf{b}). Semantik: L ( r e g e x ) = { α β | α , β ∈ { a , b } } {\displaystyle {\mathcal {L}}(regex)=\{\alpha \beta \;\vert \;\alpha ,\beta \in \{a,b\}\}} \mathcal{L}(regex)=\{\alpha\beta \;\vert\; \alpha,\beta \in \{a,b\}\}
+
+Anwendung regulärer Ausdrücke
+
+Ken Thompson nutzte diese Notation in den 1960er Jahren, um qed (eine Vorgängerversion des Unix-Editors ed) zu bauen und später das Werkzeug grep zu schreiben. Seither implementieren sehr viele Programme und Bibliotheken von Programmiersprachen Funktionen, um reguläre Ausdrücke zum Suchen und Ersetzen von Zeichenketten zu nutzen. Beispiele dafür sind die Programme sed, grep, emacs, die Programmiersprachen Perl und Tcl und Standardbibliotheken der Programmiersprachen C, C++, Java, JavaScript, Python, PHP, Ruby und das .NET-Framework. Auch die Textverarbeitung und die Tabellenkalkulation des Office-Paketes OpenOffice.org bieten die Möglichkeit, mit regulären Ausdrücken im Text zu suchen.
+
+Zwischen verschiedenen Regexp-Implementierungen gibt es Unterschiede in Funktionsumfang und Syntax. In Programmiersprachen haben sich überwiegend die Perl Compatible Regular Expressions (PCRE) durchgesetzt, die sich an der Umsetzung in Perl 5.0 orientieren. Daneben wird bei POSIX.2 zwischen „grundlegenden“ regulären Ausdrücken (basic regular expressions) und „erweiterten“ regulären Ausdrücken (extended regular expressions) unterschieden.
+
+Einige Programme, zum Beispiel der Texteditor Vim, bieten die Möglichkeit, zwischen verschiedenen Regexp-Syntaxen hin- und herzuschalten.
+
+Reguläre Ausdrücke spielen eine wichtige Rolle bei der lexikalischen Analyse von Quelltexten, beispielsweise in Compilern oder zur Syntaxhervorhebung in Editoren. Ein lexikalischer Scanner zerlegt den Quelltext mithilfe von regulären Ausdrücken in sogenannte Tokens (Schlüsselwörter, Operatoren, …). Da es sich bei den meisten Programmiersprachen um kontextfreie Sprachen handelt, sind reguläre Ausdrücke nicht mächtig genug, um deren Syntax zu beschreiben. Daher wird die bei Compilern folgende syntaktische Analyse in der Regel von einem separaten Programm, dem Parser, erledigt.
+
+Reguläre Ausdrücke spielen auch in der Bioinformatik eine Rolle. Sie kommen in Proteindatenbanken zum Einsatz, um Proteinmotive zu beschreiben. Der reguläre Ausdruck
+
+W-x{9,11}-[VFY]-[FYW]-x{6,7}-[GSTNE]-[GSTQCR]-[FYW]-R-S-A-P
+
+beschreibt zum Beispiel eine Proteindomäne in PROSITE. Der obige reguläre Ausdruck besagt Folgendes: Am Anfang wähle die Aminosäure Tryptophan (Einbuchstabencode W), dann wähle 9 bis 11 Aminosäuren frei aus, dann wähle entweder V, F oder Y, dann wähle entweder F, Y oder W, dann wieder 6 bis 7 Aminosäuren frei, dann entweder G, S, T, N oder E, dann entweder G, S, T, Q, C oder R, dann F, Y oder W, dann R dann S dann A dann P.
+Reguläre Ausdrücke in der Praxis
+
+Die meisten heutigen Implementierungen unterstützen Erweiterungen wie zum Beispiel Rückwärtsreferenzen (backreferences). Hierbei handelt es sich nicht mehr um reguläre Ausdrücke im Sinne der theoretischen Informatik, denn die so erweiterten Ausdrücke beschreiben nicht mehr notwendigerweise Sprachen vom Typ 3 der Chomsky-Hierarchie.
+
+Die folgenden Syntaxbeschreibungen beziehen sich auf die Syntax der gängigen Implementierungen mit Erweiterungen, sie entsprechen also nur teilweise der obigen Definition aus der theoretischen Informatik.
+
+Eine häufige Anwendung regulärer Ausdrücke besteht darin, spezielle Zeichenketten in einer Menge von Zeichenketten zu finden. Die im Folgenden angegebene Beschreibung ist eine (oft benutzte) Konvention, um Konzepte wie Zeichenklasse, Quantifizierung, Verknüpfung und Zusammenfassen konkret zu realisieren. Hierbei wird ein regulärer Ausdruck aus den Zeichen des zugrunde liegenden Alphabets in Kombination mit den Metazeichen [ ] ( ) { } | ? + - * ^ $ \ . (teilweise kontextabhängig) gebildet, bei manchen Implementierungen auch : ! < =. Die Meta-Eigenschaft eines Zeichens kann durch einen vorangestellten Rückwärtsstrich (Backslash) aufgehoben werden. Alle übrigen Zeichen des Alphabets stehen für sich selbst.
+Zeichenliterale
+
+Diejenigen Zeichen, die direkt (wörtlich, literal) übereinstimmen müssen, werden auch direkt notiert. Je nach System gibt es auch Möglichkeiten, das Zeichen durch den Oktal- oder Hexadezimalcode (\ooo bzw. \xhh) oder die hexadezimale Unicode-Position (\uhhhh) anzugeben.
+Ein Zeichen aus einer Auswahl
+
+Mit eckigen Klammern lässt sich eine Zeichenauswahl definieren ([ und ]). Der Ausdruck in eckigen Klammern steht dann für genau ein Zeichen aus dieser Auswahl. Innerhalb dieser Zeichenklassendefinitionen haben einige Symbole andere Bedeutungen als im normalen Kontext. Teilweise ist die Bedeutung eines Symbols vom Kontext abhängig, in dem es innerhalb der Klammern auftritt.
+
+Beispielsweise bedeutet ein Zirkumflex ^ am Anfang einer Zeichenklassendefinition, dass die Zeichenklasse negiert bzw. invertiert wird (im Sinne der Komplementbildung). Steht ein Zirkumflex jedoch irgendwo sonst in der Definition, ist es wörtlich („literally“) zu verstehen. Ebenfalls kontextabhängig ist die Bedeutung des Bindestrich-Zeichens (-). Zudem unterscheiden sich hier die Regexp-Auswerter („regex engines“) (zum Beispiel POSIX und PCRE) in einigen Punkten voneinander. Steht ein Bindestrich - zwischen zwei Zeichen in der Klassendefinition, zum Beispiel [a-g], so ist er als Bis-Strich zu verstehen, das heißt als Beschreibung eines Zeichenintervalls oder Zeichenbereichs bezüglich der ASCII-Tabelle. Das genannte Beispiel wäre äquivalent zu [abcdefg]. Am Anfang oder Ende einer Zeichenklasse stehende Bindestriche werden als das Zeichen selbst interpretiert.
+Beispiele für Zeichenauswahl [egh] 	eines der Zeichen „e“, „g“ oder „h“
+[0-6] 	eine Ziffer von „0“ bis „6“ (Bindestriche sind Indikator für einen Bereich)
+[A-Za-z0-9] 	ein beliebiger lateinischer Buchstabe oder eine beliebige Ziffer
+[^a] 	ein beliebiges Zeichen außer „a“ („^“ am Anfang einer Zeichenklasse negiert selbige)
+[-A-Z], [A-Z-] (bzw. [A-Z\-a-z], allerdings nicht gemäß POSIX)[5] 	Auswahl enthält auch den Bindestrich „-“, wenn er das erste oder das letzte Zeichen in der Aufzählung einer Zeichenklasse ist bzw. bei PCRE, wenn seine Metafunktion innerhalb einer Auswahl durch ein vorangestelltes „\“-Zeichen aufgehoben wird
+Vordefinierte Zeichenklassen
+
+Es gibt vordefinierte Zeichenklassen, die allerdings nicht von allen Implementierungen in gleicher Weise unterstützt werden, da sie lediglich Kurzformen sind und auch durch eine Zeichenauswahl beschrieben werden können. Wichtige Zeichenklassen sind:
+\d 	digit 	eine Ziffer, also [0-9] (und evtl. auch weitere Zahlzeichen in Unicode, z. B. bengalische Ziffern)
+\D 	no digit 	ein Zeichen, das keine Ziffer ist, also [^\d]
+\w 	word character 	ein Buchstabe, eine Ziffer oder der Unterstrich, also [a-zA-Z_0-9] (und evtl. auch nicht-lateinische Buchstaben, z. B. Umlaute)
+\W 	no word character 	ein Zeichen, das weder Buchstabe noch Zahl noch Unterstrich ist, also [^\w]
+\s 	whitespace 	meist zumindest das Leerzeichen und die Klasse der Steuerzeichen \f, \n, \r, \t und \v
+\S 	no whitespace 	ein Zeichen, das kein Whitespace ist, also [^\s]
+
+Ein Punkt (.) bedeutet, dass an seinem Platz ein (fast) beliebiges Zeichen stehen kann. Die meisten RegExp-Implementierungen sehen standardmäßig Zeilenumbrüche nicht als beliebiges Zeichen an, jedoch kann dieses in einigen Programmen mittels des sogenannten Single-Line-Modifiers s (zum Beispiel in /foo.bar/s) erreicht werden.
+
+In vielen neueren Implementierungen können innerhalb der eckigen Klammern nach POSIX auch Klassen angegeben werden, die selbst wiederum eckige Klammern enthalten. Sie lauten beispielsweise:
+Beispiele für Zeichenklassen, hierarchisch sortiert
+
+    [:cntrl:] – Steuerzeichen. Im ASCII sind das die Zeichen 00 bis 1F und 7F (DEL).
+    [:print:] – Druckbare Zeichen: [:alnum:], [:punct:] und Leerzeichen
+        [:space:] – Whitespace: Horizontales und vertikales Tabulatorzeichen, Zeilen- und Seitenvorschub, Wagenrücklauf und LeerzeichenZK1
+            [:blank:] – Leerzeichen oder Tabulatorzeichen
+        [:graph:] – Graphische Zeichen: [:alnum:] oder [:punct:]
+            [:punct:] – Satzzeichen wie: ! " # $ % & ' ( ) * + , - . / : ; < = > ? @ [ \ ] ^ _ ` { | } ~
+            [:alnum:] – Alphanumerische Zeichen: [:alpha:] oder [:digit:]
+                [:xdigit:] – Hexadezimale Ziffern: 0 bis 9, A bis F, a bis f.
+                    [:digit:] – Die Ziffern 0 bis 9
+                [:alpha:] – Buchstaben: [:lower:] oder [:upper:]
+                    [:lower:] – KleinbuchstabenZK2: nicht notwendigerweise nur von a bis z
+                    [:upper:] – GroßbuchstabenZK2: nicht notwendigerweise nur von A bis Z
+
+Anmerkungen:
+ZK1 Das auch als „geschütztes Leerzeichen“ bekannte Zeichen mit der Unicode-Nummer 160 (hex: A0) (entspricht dem HTML-Entity &nbsp;) wird von der Klasse [:space:] möglicherweise nicht gefunden und muss separat anhand des Kodierpunktes identifiziert werden.
+ZK2 Was Buchstaben sind, ist in üblichen Betriebssystemen locale-abhängig, also abhängig von der eingestellten Region und Sprache.[6]
+Quantoren
+
+Quantoren (englisch quantifier, auch Quantifizierer oder Wiederholungsfaktoren) erlauben es, den vorherigen Ausdruck in verschiedener Vielfachheit in der Zeichenkette zuzulassen.
+? 	Der voranstehende Ausdruck ist optional, er kann einmal vorkommen, braucht es aber nicht, das heißt, der Ausdruck kommt null- oder einmal vor. (Dies entspricht {0,1})
++ 	Der voranstehende Ausdruck muss mindestens einmal vorkommen, darf aber auch mehrfach vorkommen. (Dies entspricht {1,})
+* 	Der voranstehende Ausdruck darf beliebig oft (auch keinmal) vorkommen. (Dies entspricht {0,})
+{n} 	Der voranstehende Ausdruck muss exakt n-mal vorkommen. (Dies entspricht {n,n})
+{min,} 	Der voranstehende Ausdruck muss mindestens min-mal vorkommen.
+{min,max} 	Der voranstehende Ausdruck muss mindestens min-mal und darf maximal max-mal vorkommen.
+{0,max} 	Der voranstehende Ausdruck darf maximal max-mal vorkommen.
+
+Die Quantoren beziehen sich dabei auf den vorhergehenden regulären Ausdruck, jedoch nicht zwangsläufig auf die durch ihn gefundene Übereinstimmung. So wird zwar zum Beispiel durch a+ ein „a“ oder auch „aaaa“ vertreten, jedoch entspricht [0-9]+ nicht nur sich wiederholenden gleichen Ziffern, sondern auch Folgen gemischter Ziffern, beispielsweise „072345“.
+
+Weitere Beispiele sind:
+
+    [ab]+ entspricht „a“, „b“, „aa“, „bbaab“ etc.
+    [0-9]{2,5} entspricht zwei, drei, vier oder fünf Ziffern in Folge, z. B. „42“ oder „54072“, jedoch nicht den Zeichenfolgen „0“, „1.1“ oder „a1a1“.
+
+Soll eine Zeichenkette nur aus dem gesuchten Muster bestehen (und es nicht nur enthalten), so muss in den meisten Implementierungen explizit definiert werden, dass das Muster vom Anfang (\A oder ^)QF1 bis zum Ende der Zeichenkette (\Z, \z oder $)QF1 reichen soll. Andernfalls erkennt zum Beispiel [0-9]{2,5} auch bei der Zeichenkette „1234507“ die Teilzeichenkette „12345“. Aus dem gleichen Grund ergäbe beispielsweise a* immer einen Treffer, da jede Zeichenfolge – selbst das leere Wort „“ – mindestens 0-mal das Zeichen „a“ enthält.
+
+Quantoren sind standardmäßig „gierig“ (englisch greedy) implementiert. Das heißt, ein regulärer Ausdruck wird zur größtmöglichen Übereinstimmung aufgelöst. Da dieses Verhalten jedoch nicht immer so gewollt ist, lassen sich bei vielen neueren Implementierungen Quantoren als „genügsam“ oder „zurückhaltend“ (englisch non-greedy, reluctant) deklarieren. Zum Beispiel wird in Perl oder tcl hierfür dem Quantor ein Fragezeichen ? nachgestellt. Die Implementierung von genügsamen Quantoren ist vergleichsweise aufwendig und während des Suchvorgangs langsam (erfordert Backtracking), weshalb manche Implementierungen diese ausdrücklich vermeiden z. B. sed.
+
+Beispiel (Perl-Syntax)
+    Angenommen, es wird der reguläre Ausdruck A.*B auf die Zeichenfolge „ABCDEB“ angewendet, so würde er sie als „ABCDEB“ finden. Mit Hilfe des „non-greedy“-Quantors *? passt der nun modifizierte Ausdruck – also A.*?B – nur die Zeichenkette „AB“, bricht also die Suche nach dem ersten gefundenen „B“ ab. Ein gleichwertiger regulärer Ausdruck für Interpreter, die diesen Quantor nicht unterstützen, wäre A[^B]*B.
+
+QF1 Die Zeichen ^ und $ passen im multiline-Modus zusammen, also wenn der m-Modifier gesetzt wird, auch Zeilenanfänge und -enden.
+Possessives Verhalten
+
+Eine Variante des oben beschriebenen gierigen Verhaltens ist das possessive matching. Da hierbei jedoch das Backtracking verhindert wird, werden einmal übereinstimmende Zeichen nicht wieder freigegeben. Daher finden sich in der Literatur auch die synonymen Bezeichnungen atomic grouping, independent subexpression oder non-backtracking subpattern. Die Syntax für diese Konstrukte variiert bei den verschiedenen Programmiersprachen. Ursprünglich wurden solche Teilausdrücke (engl. „subpattern“) in Perl durch (?>Ausdruck) formuliert. Daneben existieren seit Perl 5.10 die äquivalenten, in Java bereits üblichen possessiven Quantoren ++, *+, ?+ und {min,max}+.
+
+Beispiel
+    Angenommen es wird auf die Zeichenfolge „ABCDEB“ der reguläre Ausdruck A.*+B angewendet, so fände er keine Übereinstimmung. Bei der Abarbeitung des regulären Ausdrucks würde der Teil .*+ bis zum Ende der Zeichenkette übereinstimmen. Um jedoch den gesamten Ausdruck zu finden, müsste ein Zeichen – hier also das „B“ – wieder freigegeben werden. Der possessive Quantor verbietet dies aufgrund des unterdrückten Backtrackings, weshalb keine erfolgreiche Übereinstimmung gefunden werden kann.
+
+Gruppierungen und Rückwärtsreferenzen
+
+Ausdrücke lassen sich mit runden Klammern ( und ) zusammenfassen: Etwa erlaubt (abc)+ ein „abc“ oder ein „abcabc“ etc.
+
+Einige Implementierungen speichern die gefundenen Übereinstimmungen von Gruppierungen ab und ermöglichen deren Wiederverwendung im regulären Ausdruck oder bei der Textersetzung. Diese werden Rückwärtsreferenzen (englisch back references) genannt. Häufig wird dazu die Schreibweise \n oder $n verwendet, wobei n die Übereinstimmung der n-ten Gruppierung entspricht. Eine Sonderstellung stellt dabei n=0 dar, das meist für die Übereinstimmung des gesamten regulären Ausdrucks steht.
+
+Beispiel
+    Ein Suchen und Ersetzen mit AA(.*?)BB als regulärem Suchausdruck und \1 als Ersetzung ersetzt alle Zeichenketten, die von AA und BB eingeschlossen sind, durch den zwischen AA und BB enthaltenen Text. Das heißt AA und BB und der Text dazwischen werden ersetzt durch den Text, der ursprünglich zwischen AA und BB stand, also fehlen AA und BB im Ergebnis.
+
+Interpreter von regulären Ausdrücken, die Rückwärtsreferenzen zulassen, entsprechen nicht mehr dem Typ 3 der Chomsky-Hierarchie. Mit dem Pumping-Lemma lässt sich zeigen, dass ein regulärer Ausdruck, der feststellt, ob in einer Zeichenkette vor und nach der 1 die gleiche Anzahl von 0 steht, keine reguläre Sprache ist.
+
+Daneben gibt es auch noch Gruppierungen, die keine Rückwärtsreferenz erzeugen (englisch non-capturing). Die Syntax dafür lautet in den meisten Implementierungen (?:…). Regexp-Dokumentationen weisen darauf hin, dass die Erzeugung von Rückwärtsreferenzen stets vermieden werden soll, wenn kein späterer Zugriff auf sie erfolge. Denn die Erzeugung der Referenzen kostet Ausführungszeit und belegt Platz zur Speicherung der gefundenen Übereinstimmung. Zudem lassen die Implementationen nur eine begrenzte Anzahl an Rückwärtsreferenzen zu (häufig nur maximal 9).
+
+Beispiel
+
+Mit dem regulären Ausdruck \d+(?:-\d+)* können Folgen von durch Bindestriche getrennten Zahlenfolgen gefunden werden, ohne dabei die letzte durch einen Bindestrich getrennte Zahlenfolge als Rückreferenz zu erhalten.
+
+Beispiel
+
+Ein Datum im Format MM/DD/YYYY soll in das Format YYYY-MM-DD überführt werden.
+
+    Mit Hilfe des Ausdrucks ([0-1]?[0-9])\/([0-3]?[0-9])\/([0-9]{4}) werden die drei Zahlengruppen extrahiert.
+    Mit dem Ersetzungs-Ausdruck \3-\1-\2 werden die einzelnen Gruppen in das richtige Format überführt.
+
+Alternativen
+
+Man kann alternative Ausdrücke mit dem |-Symbol zulassen.
+
+Beispiel
+    ABC|abc bedeutet „ABC“ oder „abc“, aber z. B. nicht „Abc“.
+
+Weitere Zeichen
+
+Um die oft auf Zeichenketten bezogenen Anwendungen auf dem Computer zu unterstützen, werden in der Regel zusätzlich zu den bereits genannten die folgenden Zeichen definiert:
+^ 	steht für den Zeilenanfang (nicht zu verwechseln mit ^ bei der Zeichenauswahl mittels [ und ]).
+$ 	kann je nach Kontext für das Zeilen- oder Zeichenketten-Ende stehen, wobei bei manchen Implementierungen noch ein „\n“ folgen darf. Das tatsächliche Ende passt zu \z.
+\ 	hebt gegebenenfalls die Metabedeutung des nächsten Zeichens auf (siehe Maskierungszeichen). Beispielsweise lässt der Ausdruck (A\*)+ die Zeichenketten „A*“, „A*A*“ usw. zu. Auf diese Weise lässt sich auch ein Punkt „.“ mit \. suchen, während nach \ mit \\ gesucht wird.
+\b 	leere Zeichenkette am Wortanfang oder am Wortende
+\B 	leere Zeichenkette, die nicht den Anfang oder das Ende eines Wortes bildet
+\< 	leere Zeichenkette am Wortanfang
+\> 	leere Zeichenkette am Wortende
+\n 	ein Zeilenumbruch im Unix-Format
+\r 	ein Zeilenumbruch im (alten, d. h. vor dem Jahr 1999) Mac-Format
+\r\n 	ein Zeilenumbruch im DOS- und Windows-Format
+\t 	ein Horizontal-Tabulatorzeichen
+
+Beispiel
+    [^ ]$ bedeutet: Die Zeichenkette muss aus mindestens einem Zeichen bestehen, und das letzte Zeichen darf kein Leerzeichen sein.
+
+Look-around assertions
+
+Perl Version 5 führte zusätzlich zu den üblichen regulären Ausdrücken auch look-ahead und look-behind assertions (etwa „vorausschauende“ bzw. „nach hinten schauende“ Annahmen oder Behauptungen) ein, was unter dem Begriff look-around assertions zusammengefasst wird.[7] Diese Konstrukte erweitern die regulären Ausdrücke um die Möglichkeit, kontextabhängige (engl.: „context sensitive“) Bedingungen zu formulieren, ohne den Kontext selbst als passend zu finden. Das heißt, möchte man alle Zeichenfolgen „Sport“ finden, denen die Zeichenfolge „verein“ folgt, ohne dass jedoch die gefundene Zeichenfolge die Zeichenfolge „verein“ selbst enthält, wäre dies mit einer look-ahead assertion möglich: Sport(?=verein). Im Beispielsatz „Ein Sportler betreibt Sport im Sportverein.“ würde jener reguläre Ausdruck also zum letzten Vorkommen von „Sport“ passen, da nur diesem die Zeichenfolge „verein“ folgt; er würde jedoch nicht zur Teilzeichenkette „Sportverein“ passen.
+
+Aufgrund der Eigenschaft, dass der angegebene Kontext (im Beispiel „verein“) zwar angegeben wird, jedoch kein expliziter Bestandteil der passenden Zeichenkette (hier „Sport“) ist, wird im Zusammenhang mit assertions meist das Attribut zero-width mitgenannt. Die vollständigen Bezeichnungen lauten somit – je nachdem, ob ein bestimmter Kontext gefordert (positiv) oder verboten (negativ) ist – zero-width positive/negative look-ahead/behind assertions. Die Bezeichnungen der Richtungen rühren daher, dass Regexp-Parser eine Zeichenkette immer von links nach rechts abarbeiten.
+Definition 	Bezeichnung 	Erklärung 	Schreibweise
+(?=Ausdruck) 	positive look-ahead assertion 	Ausdruck muss auf vorgenannten Ausdruck folgen 	Ausdruck(?=Ausdruck)
+(?!Ausdruck) 	negative look-ahead assertion 	Ausdruck darf nicht auf vorgenannten Ausdruck folgen 	Ausdruck(?!Ausdruck)
+(?<=Ausdruck) 	positive look-behind assertion 	Ausdruck muss nachfolgendem Ausdruck vorausgehen 	(?<=Ausdruck)Ausdruck
+(?<!Ausdruck) 	negative look-behind assertion 	Ausdruck darf nachfolgendem Ausdruck nicht vorausgehen 	(?<!Ausdruck)Ausdruck
+
+Look-arounds werden nicht nur von Perl und PCRE, sondern unter anderem auch von Java, .NET und Python unterstützt. JavaScript interpretiert ab Version 1.5 positive und negative Look-Aheads.[8]
+
+Beispiel
+    \s(?=EUR) steht für ein „Whitespace“-Zeichen (d. h. Leerzeichen oder Tabulator), dem die Zeichenkette EUR folgt. Im Gegensatz zu \sEUR gehört hier EUR nicht zu einer passenden Zeichenkette (engl.: „matched character string“).
+
+Bedingte Ausdrücke
+
+Relativ wenig verbreitet sind bedingte Ausdrücke. Diese sind unter anderem in Perl, PCRE und dem .NET-Framework einsetzbar. Python bietet für solche Ausdrücke im Zusammenhang mit look-around assertions nur eingeschränkte Funktionalität.[9]
+(?(Bedingung)wahr-Ausdruck|falsch-Ausdruck) 	Wenn der gegebene Ausdruck „Bedingung“ gefunden wird, kommt der „wahr-Ausdruck“ zur Anwendung. Wenn der Suchausdruck nicht gefunden werden kann, kommt der „falsch-Ausdruck“ zur Anwendung.
+
+Beispiel
+
+    Mit dem Ausdruck (\()?\d+(?(1)\)) werden Zeichenfolgen wie 1, (2), 34 oder (567), aber nicht 3) gefunden.
+
+Literatur
+
+Reguläre Ausdrücke
+
+    Jeffrey Friedl: Reguläre Ausdrücke. O’Reilly, ISBN 3-89721-720-1. online
+    Tony Stubblebine: Reguläre Ausdrücke – kurz und gut. O’Reilly, ISBN 3-89721-264-1.
+    Mehran Habibi: Real World Regular Expressions with Java 1.4. Springer, ISBN 1-59059-107-0.
+    Jan Goyvaerts, Steven Leviathan: Reguläre Ausdrücke Kochbuch. O’Reilly, ISBN 978-3-89721-957-1.
+    Michael Fitzgerald: Introducing Regular Expressions O’Reilly, ISBN 978-1-4493-9268-0.
+
+Reguläre Ausdrücke und natürliche Sprachen
+
+    Kenneth R. Beesley, Lauri Karttunen: Finite-State Morphology. Distributed for the Center for the Study of Language and Information. 2003. 2003 Series: (CSLI-SCL) Studies in Computational Linguistics.
+
+Reguläre Ausdrücke und Automatentheorie
+
+    Jan Lunze: Ereignisdiskrete Systeme. Oldenbourg, 2006, ISBN 3-486-58071-X, S. 160–192.
+
+Forschungsliteratur
+
+    Stephen C. Kleene: Representation of Events in Nerve Nets and Finite Automata. In: Claude E. Shannon, John McCarthy (Hrsg.): Automata Studies. Princeton University Press, 1956, S. 3–42.
+
+Weblinks
+
+    Reguläre Sprachen, reguläre Ausdrücke
+    POSIX-Spezifikation für reguläre Ausdrücke (englisch)
+    Perl-Syntax regulärer Ausdrücke (englisch)
+    Regex-Kurs für Anfänger mit Übungen
+    Umfangreiche Anleitung zu regulären Ausdrücken und verschiedenen Implementierungen (englisch)
+
+Software
+
+    Online visual regex tester
+    Online regex tester
+    Online regex tester – Visualisierung und schrittweise Nachverfolgung der Funktionsweise von regulären Ausdrücken (englisch)
+
+Einzelnachweise
+Stephen C. Kleene: Representation of Events in Nerve Nets and Finite Automata. In: Claude E. Shannon, John McCarthy (Hrsg.): Automata Studies. Princeton University Press, 1956, S. 3–42.
+Alfred V. Aho, Ravi Sethi, Jeffrey Ullman: Compilers: Principles, Techniques and Tools. Addison-Wesley, 1986
+John E. Hopcroft, Jeffry D. Ullman: Einführung in die Automatentheorie, formale Sprachen und Komplexitätstheorie. Addison-Wesley, Bonn 1994, ISBN 3-89319-744-3.
+Jacques Sakarovitch: The Language, the Expression, and the (Small) Automaton. In: LNCS. 3845, 2006, S. 15–30. doi:10.1007/11605157_2.
+POSIX-Spezifikationen
+RE Bracket Expression, IEEE Std 1003.1, The Open Group Base Specifications, 2004
+Lookahead and Lookbehind Zero-Width Assertions. Regular-Expressions.info
+Mozilla Developer Network: JavaScript-Referenz
+If-Then-Else Conditionals in Regular Expressions. Regular-Expressions.info
