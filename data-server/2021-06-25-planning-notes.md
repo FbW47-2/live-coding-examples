@@ -1,23 +1,14 @@
 # Week Planning
 
-Frage an Ahmad und Cüneyt ob individual Coaching. Wenn ja, dann weiter an Sophie Peschel.
-
 Content für nächste Woche:
 ## Festigen
   - Middleware (next)
   - Router/Controller
+  - Error-Handling
     Programmier-Methodik:
       - Single-File to Multi-File
 
-
-## Neu
-  - (11) Handling Errors:
-    - Error handling middleware signature: `(err, req, res, next) => { ... }`
-    - Changing response status: `res.status()`
-    - Using the error handler: `next(err)`
-    - Catching 404s with a default route:
-      `app.use(<404 controller>)`
-
+## Deployment
   - Introduction: Getting our Server Online
     - Environment Variables:
       - Development vs. Production
@@ -29,7 +20,7 @@ Content für nächste Woche:
           Discuss: Deployment Specific Configuration, Security and Dependencies
 
           What is deployment specific configuration?
-            - fully qualified DNS-names, - but partial addresses may be a good idea
+            - DNS-names
             - IP-addresses
             - Secrets
 
@@ -39,18 +30,9 @@ Content für nächste Woche:
           Is hardcoding deployment specific configuration a good idea?
 
           Why not?
-
           => Store secrets in a secret store, e. g. HashiCorp "Vault" (https://www.vaultproject.io/)
+          => alternative "admin tool" (e. g. Ansible)
           ```
-
-    - Deployment configuration:
-      - Defining production secrets
-      - Using our secrets in Heroku/Vercel
-
-    - Deployment alternatives:
-      - Heroku
-      - Vercel
-      - Self hosted
 
 ## By the Way
 - Productivity
