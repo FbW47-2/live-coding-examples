@@ -6,10 +6,12 @@ Die Datenstruktur soll folgendes beispielhaftes Format haben:
 ```json
 {
     users: [
+      {
       "id": "1",
       "username": "USERNAME",
       "fullname": "VORNAME NACHNAME",
       "email": "EMAIL_ADRESSE"
+      }
     ]
 }
 ```

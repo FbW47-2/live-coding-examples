@@ -1,0 +1,19 @@
+{
+  "name": "10-static",
+  "version": "1.0.0",
+  "main": "server.js",
+  "author": "Thomas Hofmann",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "serve-index": "^1.9.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}
