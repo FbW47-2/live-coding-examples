@@ -34,6 +34,15 @@ app.use((req, res, next) => {
 	next();
 });
 
+app.use((req, res, next) => {
+
+	res.locals = {
+		userId: 1,
+		language: "de"
+	};
+	next();
+})
+
 // app.use((req, res, next) => {
 
 // 	const apiKey = req.query.apiKey;
@@ -56,6 +65,14 @@ db.data ||= { messages: [] };
 
 app.listen(3000, () => {
 	console.log('listening on port 3000');
+});
+
+app.get('/messages', async (req, res) => {
+	// TODO: sende Response mit der Nachricht (ID) als json zum Client.
+	// req.params("name")
+	db.data.messages.push({ id: 1, title: "cafer", text: "hallo" });
+	await db.write();
+	res.send("es hat geklappt");
 });
 
 // http://localhost:3000/messages/1
@@ -121,14 +138,22 @@ app.put("/messages/:id", async (req, res) => {
 
 	//finde index der message in der datenbank anhand 
 	
+	// const newObj = {
+		
+	// 	name: "zeynep",
+	// 	surname: "pehlivan"
+	// };
+
 	const newMessage = {
 
 		id: +req.params.id,
-		...req.body, //es gibt nur den inhalt des objects, den man in postman angibt
+		// ...newObj
+		// ...req.body, //es gibt nur den inhalt des objects, den man in postman angibt
 	};
 
 	console.log(newMessage);
 	const oldMessageIndex = db.data.messages.findIndex ( message => +message.id === +req.params.id);
+	console.log(oldMessageIndex);
 	db.data.messages[oldMessageIndex] = newMessage;
 	await db.write();
 	res.status(204).send();
@@ -141,4 +166,5 @@ app.use((error, req, res, next) => {
 
 	console.log(error);
 	res.status(500).send();
+	process.exit(1); //prozess killen
 });
