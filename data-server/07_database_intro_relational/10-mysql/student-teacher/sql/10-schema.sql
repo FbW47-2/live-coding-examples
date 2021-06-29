@@ -1,0 +1,24 @@
+CREATE TABLE SUPERVISOR (SupNo int PRIMARY KEY, SupName text);
+
+CREATE TABLE STUDENT (StuNo int PRIMARY KEY, Name text);
+
+CREATE TABLE COURSE (CourseNo int PRIMARY KEY, Name text);
+
+CREATE TABLE LECTURER (LecturerNo int PRIMARY KEY, Name text);
+
+CREATE TABLE LECTURER_COURSE (
+    CourseNo int PRIMARY KEY,
+    LecturerNo int,
+    FOREIGN KEY (CourseNo) REFERENCES COURSE(CourseNo),
+    FOREIGN KEY (LecturerNo) REFERENCES LECTURER(LecturerNo)
+);
+
+CREATE TABLE COURSE_STUDENT_SUPERVISOR (
+    StuNo int,
+    CourseNo int,
+    SupNo int,
+    FOREIGN KEY (StuNo) REFERENCES STUDENT(StuNo),
+    FOREIGN KEY (CourseNo) REFERENCES COURSE(CourseNo),
+    FOREIGN KEY (SupNo) REFERENCES SUPERVISOR(SupNo),
+    PRIMARY KEY(StuNo, CourseNo)
+);
