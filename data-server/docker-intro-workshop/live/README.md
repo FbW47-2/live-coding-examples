@@ -4,8 +4,8 @@
 
 ```
 Linux
-$> apt install docker-ce
-$> apt install docker-compose
+$> sudo apt install docker-ce
+$> sudo apt install docker-compose
 
 # Eigener NUTZERNAME
 $> echo $USER
