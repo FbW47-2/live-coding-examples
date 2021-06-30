@@ -4,7 +4,16 @@
 
 ```
 Linux
+
+# install docker:
 $> sudo apt install docker-ce
+# oder
+$> sudo apt install docker
+# oder
+$> sudo apt install docker.io
+# je nachdem, was in den Repositories verfügbar ist.
+
+# install docker-compose:
 $> sudo apt install docker-compose
 
 # Eigener NUTZERNAME
