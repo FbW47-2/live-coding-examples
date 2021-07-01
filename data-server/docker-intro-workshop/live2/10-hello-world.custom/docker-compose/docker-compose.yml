@@ -1,0 +1,17 @@
+version: "3.7"
+
+# https://docs.docker.com/compose/
+# docu on docker-compose.yml:
+#   https://docs.docker.com/compose/compose-file/compose-file-v3/
+
+services:
+    hello: # Name des Services, beliebig
+        build: # beschreibt wo/wie das Image gebaut werden soll
+            context: ./build
+            #dockerfile: Dockerfile # default: Dockerfile
+    
+    service_b:
+        build:
+            context: ./build
+
+        command: echo 'Hallo Welt'
