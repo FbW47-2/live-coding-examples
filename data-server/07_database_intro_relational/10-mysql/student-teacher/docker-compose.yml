@@ -22,8 +22,6 @@ services:
 
   cli:
     image: mysql:8
-    #build:
-    #  context: ./cli
     environment:
       MYSQL_HOST: db
       #MYSQL_TCP_PORT: 3306
