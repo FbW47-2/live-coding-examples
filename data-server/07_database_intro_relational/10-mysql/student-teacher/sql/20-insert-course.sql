@@ -4,3 +4,4 @@ VALUES
     (2, 'mechanics'),
     (3, 'structures'),
     (4, 'inf. eng.')
+;
