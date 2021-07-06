@@ -1,0 +1,42 @@
+version: '3.1'
+
+# original source:
+# https://hub.docker.com/_/mongo
+
+services:
+
+  mongo:
+    image: mongo:4.4-bionic
+    #restart: always
+    
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+
+    # make it available to the outside
+    ports:
+      - "27017:27017" 
+
+  cli:
+    image: mongo:4.4-bionic
+    
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    
+    command: mongo --host mongo -u root -p example
+    # inside of that container connect to "mongo" via:
+    # $> mongo --host mongo -u root -p
+
+  # NOT WORKING: bug reported
+  # mongo-express provides an admin-interface
+  # source: 
+  # https://hub.docker.com/_/mongo-express
+  #mongo-express:
+  #  image: mongo-express
+  #  #restart: always
+  #  ports:
+  #    - 8081:8081
+  #  environment:
+  #    ME_CONFIG_MONGODB_ADMINUSERNAME: root
+  #    ME_CONFIG_MONGODB_ADMINPASSWORD: example
