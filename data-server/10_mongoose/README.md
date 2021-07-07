@@ -1,5 +1,18 @@
 # MongoDB
 
+## Sample Code:
+https://github.com/MicheleMarschner/ToDoApp-server
+
+### Live Code Run once Scripts
+- get started
+- CRUD
+
+- refactor CRUD:
+  - database config/connection
+  - schema/model
+
+### Refactor Dominik's server to use "mongoose" instead of "mongodb"
+
 ## Usage "Docker"
 ```bash
 # first start or after `down`
@@ -18,6 +31,9 @@ $> docker-compose down
 - Setup and use dockerized environment
   - mongodb
   - mongo-express
+- mongoose getting started
+  - Schema-Model-Document
+  - CRUD with mongoose
 
 ---
 

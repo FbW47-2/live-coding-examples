@@ -2,7 +2,7 @@
   "name": "mongoose",
   "version": "1.0.0",
   "description": "demo for mongoose following \"Getting Started\"",
-  "main": "server.js",
+  "main": "mongoose.js",
   "author": "Thomas Hofmann",
   "license": "MIT",
   "type": "module",

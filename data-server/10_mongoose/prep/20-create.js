@@ -11,8 +11,6 @@ const PASS = 'example';
 const DATABASE = 'test';
 const COLLECTION = 'collection_a';
 
-const log = console.log;
-
 function logError(e) {
 	console.error(e);
 }
@@ -32,37 +30,24 @@ mongoose.connect(
 	}
 );
 
-
 await db.once('open', async () => {
-	console.log('database-connection opened')
-
-	// Ein Schema bildet die Basis, - es definiert Eigenschaften (Attribute und Methoden).
-	const schema = mongoose.Schema({
-		name: String
+	const UserSchema = mongoose.Schema({
+		name: String,
+		email: String
 	});
 
-	schema.methods.getName = function() {
-		return this.name? this.name : 'NOT SET';
-	}
+	const User = mongoose.model('User', UserSchema);
 
-	// aus dem Schema wird ein Model abgeleitet:
-	const MyModel = mongoose.model('Model', schema);
+	const user = new User({
+		name: "Thomas", 
+		email: "thomas.hofmann@digitalcareerinstitute.org"
+	});
 
-	const myInstance = new MyModel({name: "Thomas"});
-
-	log("instance' name:", myInstance.getName());
-	// up to now only available inside of running program
-
-	log('saving to database');
-	await myInstance.save((err, instance) => {
+	await user.save((err, instance) => {
 		if (err) return console.error('error saving instance:', err);
-		console.log("instance saved");
+		console.log("instance saved", user);
 	});
-
-	MyModel.find((err, instances) =>{
-		if (err) return console.error('error in Model.find', err);
-		console.log('instances:', instances);
-	});
+	
+	db.close();
 });
 
-//db.close();
