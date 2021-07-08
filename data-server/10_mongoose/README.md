@@ -113,3 +113,5 @@ $> docker-compose down
 [mongoose "Getting Started"](https://mongoosejs.com/docs/index.html)
 
 [MongoDB Compass (Admin GUI)](https://www.mongodb.com/try/download/compass)
+
+[Socket](https://de.wikipedia.org/wiki/Socket_%28Software%29)
